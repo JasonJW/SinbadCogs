@@ -93,6 +93,16 @@ class SuggestionBox:
         else:
             await self.bot.say("Suggestions enabled.")
 
+    @checks.admin_or_permissions(manage_server=True)
+    @setsuggest.command(name='reset', pass_context=True,no_pm=True)
+    async def suggest_reset(self,ctx)
+        '''Reset Ticket Counter for Server'''
+        server = ctx.message.server
+        if server.id in self.settings:
+            self.settings[server.id]['tickets'] = 0
+            self.save_json()
+            await self.bot.say('Suggestion counter reset.')
+
     @commands.command(name="suggest", pass_context=True)
     async def makesuggestion(self, ctx, *, suggestion=None):
         "make a suggestion by following the prompts"
