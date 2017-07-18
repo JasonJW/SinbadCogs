@@ -33,6 +33,7 @@ class SuggestionBox:
 
         if server_id not in self.settings:
             self.settings[server_id] = {'inactive': True,
+                                        'server':
                                         'output': [],
                                         'cleanup': False,
                                         'usercache': [],
@@ -50,9 +51,15 @@ class SuggestionBox:
 
     @checks.admin_or_permissions(Manage_server=True)
     @setsuggest.command(name="output", pass_context=True, no_pm=True)
-    async def setoutput(self, ctx, chan=None):
+    async def setoutput(self, ctx, chan=None, server : discord.Server.id=None):
         """sets the output channel(s) by id"""
-        server = ctx.message.server
+        if server=None:
+            server = ctx.message.server
+        else:
+            servers = self.bot.servers
+            for serv in servers:
+                if serv.id = server:
+                    server = serv
         if server.id not in self.settings:
             self.initial_config(server.id)
 
@@ -143,7 +150,10 @@ class SuggestionBox:
         for output in self.settings[server.id]['output']:
             where = server.get_channel(output)
             if where is not None:
-                    await self.bot.send_message(where, embed=em)
+                message = await self.bot.send_message(where, embed=em)
+                self.bot.add_reaction(message,'👍')
+                self.bot.add_reaction(message,'❌')
+                self.bot.add_reaction(message, '👎')
 
         self.settings[server.id]['usercache'].remove(author.id)
         self.save_json()
