@@ -33,7 +33,6 @@ class SuggestionBox:
 
         if server_id not in self.settings:
             self.settings[server_id] = {'inactive': True,
-                                        'server':
                                         'output': [],
                                         'cleanup': False,
                                         'usercache': [],
