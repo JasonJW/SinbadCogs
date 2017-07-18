@@ -36,7 +36,8 @@ class SuggestionBox:
                                         'output': [],
                                         'cleanup': False,
                                         'usercache': [],
-                                        'multiout': False
+                                        'multiout': False,
+                                        'tickets': 0
                                         }
             self.save_json()
 
@@ -129,8 +130,9 @@ class SuggestionBox:
             self.settings[server.id]['usercache'].remove(author.id)
             self.save_json()
         else:
+            self.settings[server.id]['tickets']+=1
+            self.save_json()
             await self.send_suggest(message, server)
-
             await self.bot.send_message(author, "Your suggestion was "
                                         "submitted.")
 
@@ -141,8 +143,8 @@ class SuggestionBox:
         timestamp = message.timestamp.strftime('%Y-%m-%d %H:%M')
         avatar = author.avatar_url if author.avatar \
             else author.default_avatar_url
-
-        em = discord.Embed(description=suggestion,
+        title = '{} Suggestion # {}'.format(self.bot.name, self.settings[server.id]['tickets'])
+        em = discord.Embed(title=title, description=suggestion,
                            color=discord.Color.purple())
         em.set_author(name='Suggestion from {}'.format(author.name),
                       icon_url=avatar)
