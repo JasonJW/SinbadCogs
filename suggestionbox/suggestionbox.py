@@ -50,15 +50,15 @@ class SuggestionBox:
 
     @checks.admin_or_permissions(Manage_server=True)
     @setsuggest.command(name="output", pass_context=True, no_pm=True)
-    async def setoutput(self, ctx, chan=None, server : discord.Server.id=None):
+    async def setoutput(self, ctx, chan=None, serv : discord.Server.id=None):
         """sets the output channel(s) by id"""
-        if server=None:
+        if serv==None:
             server = ctx.message.server
         else:
             servers = self.bot.servers
-            for serv in servers:
-                if serv.id = server:
-                    server = serv
+            for s in servers:
+                if s.id = server:
+                    server = s
         if server.id not in self.settings:
             self.initial_config(server.id)
 
