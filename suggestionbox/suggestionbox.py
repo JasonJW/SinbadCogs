@@ -95,7 +95,7 @@ class SuggestionBox:
 
     @checks.admin_or_permissions(manage_server=True)
     @setsuggest.command(name='reset', pass_context=True,no_pm=True)
-    async def suggest_reset(self,ctx)
+    async def suggest_reset(self,ctx):
         '''Reset Ticket Counter for Server'''
         server = ctx.message.server
         if server.id in self.settings:
