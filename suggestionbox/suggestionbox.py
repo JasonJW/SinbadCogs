@@ -142,14 +142,15 @@ class SuggestionBox:
         else:
             self.settings[server.id]['tickets']+=1
             self.save_json()
-            await self.send_suggest(message, server)
+            await self.send_suggest(message, server, suggestion=suggestion)
             await self.bot.send_message(author, "Your suggestion was "
                                         "submitted.")
 
-    async def send_suggest(self, message, server):
+    async def send_suggest(self, message, server, suggestion = None):
 
         author = message.author
-        suggestion = message.clean_content
+        if suggestion is None:
+            suggestion = message.clean_content
         timestamp = message.timestamp.strftime('%Y-%m-%d %H:%M')
         avatar = author.avatar_url if author.avatar \
             else author.default_avatar_url
