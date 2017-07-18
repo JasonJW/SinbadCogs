@@ -165,9 +165,9 @@ class SuggestionBox:
             where = server.get_channel(output)
             if where is not None:
                 message = await self.bot.send_message(where, embed=em)
-                await self.bot.add_reaction(message,'👍')
-                await self.bot.add_reaction(message,'❌')
                 await self.bot.add_reaction(message, '👎')
+                await self.bot.add_reaction(message,'👍')
+                # await self.bot.add_reaction(message,'❌')
         try:
             self.settings[server.id]['usercache'].remove(author.id)
         except:
