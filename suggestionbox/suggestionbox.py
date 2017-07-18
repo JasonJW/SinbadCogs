@@ -143,7 +143,7 @@ class SuggestionBox:
         timestamp = message.timestamp.strftime('%Y-%m-%d %H:%M')
         avatar = author.avatar_url if author.avatar \
             else author.default_avatar_url
-        title = '{} Suggestion # {}'.format(self.bot.User.name, self.settings[server.id]['tickets'])
+        title = 'Suggestion # {}'.format(self.settings[server.id]['tickets'])
         em = discord.Embed(title=title, description=suggestion,
                            color=discord.Color.purple())
         em.set_author(name='Suggestion from {}'.format(author.name),
