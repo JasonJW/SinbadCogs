@@ -120,7 +120,7 @@ class SuggestionBox:
             message = await self.bot.wait_for_message(channel=dm.channel,
                                                       author=author, timeout=120)
         else:
-            message = suggestion
+            message = ctx.message
 
         if message is None:
             await self.bot.send_message(author,
