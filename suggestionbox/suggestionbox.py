@@ -116,7 +116,7 @@ class SuggestionBox:
                                          "Please respond to this message"
                                          "with your suggestion.\nYour "
                                          "suggestion should be a single "
-                                         "message")
+                                         "message.")
         message = await self.bot.wait_for_message(channel=dm.channel,
                                                   author=author, timeout=120)
 
@@ -150,9 +150,9 @@ class SuggestionBox:
             where = server.get_channel(output)
             if where is not None:
                 message = await self.bot.send_message(where, embed=em)
-                self.bot.add_reaction(message,'👍')
-                self.bot.add_reaction(message,'❌')
-                self.bot.add_reaction(message, '👎')
+                await self.bot.add_reaction(message,'👍')
+                await self.bot.add_reaction(message,'❌')
+                await self.bot.add_reaction(message, '👎')
 
         self.settings[server.id]['usercache'].remove(author.id)
         self.save_json()
