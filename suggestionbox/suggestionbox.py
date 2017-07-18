@@ -155,8 +155,10 @@ class SuggestionBox:
                 await self.bot.add_reaction(message,'👍')
                 await self.bot.add_reaction(message,'❌')
                 await self.bot.add_reaction(message, '👎')
-
-        self.settings[server.id]['usercache'].remove(author.id)
+        try:
+            self.settings[server.id]['usercache'].remove(author.id)
+        except:
+            pass
         self.save_json()
 
 
