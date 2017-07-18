@@ -93,7 +93,7 @@ class SuggestionBox:
             await self.bot.say("Suggestions enabled.")
 
     @commands.command(name="suggest", pass_context=True)
-    async def makesuggestion(self, ctx):
+    async def makesuggestion(self, ctx, *, suggestion=None):
         "make a suggestion by following the prompts"
         author = ctx.message.author
         server = ctx.message.server
@@ -108,17 +108,19 @@ class SuggestionBox:
         if author.id in self.settings[server.id]['usercache']:
             return await self.bot.say("Finish making your prior sugggestion "
                                       "before making an additional one")
-
-        await self.bot.say("I will message you to collect your suggestion.")
-        self.settings[server.id]['usercache'].append(author.id)
-        self.save_json()
-        dm = await self.bot.send_message(author,
-                                         "Please respond to this message"
-                                         "with your suggestion.\nYour "
-                                         "suggestion should be a single "
-                                         "message.")
-        message = await self.bot.wait_for_message(channel=dm.channel,
-                                                  author=author, timeout=120)
+        if suggestion is None:
+            await self.bot.say("I will message you to collect your suggestion.")
+            self.settings[server.id]['usercache'].append(author.id)
+            self.save_json()
+            dm = await self.bot.send_message(author,
+                                             "Please respond to this message"
+                                             "with your suggestion.\nYour "
+                                             "suggestion should be a single "
+                                             "message.")
+            message = await self.bot.wait_for_message(channel=dm.channel,
+                                                      author=author, timeout=120)
+        else:
+            message = suggestion
 
         if message is None:
             await self.bot.send_message(author,
