@@ -57,7 +57,7 @@ class SuggestionBox:
         else:
             servers = self.bot.servers
             for s in servers:
-                if s.id = server:
+                if s.id = serv:
                     server = s
         if server.id not in self.settings:
             self.initial_config(server.id)
