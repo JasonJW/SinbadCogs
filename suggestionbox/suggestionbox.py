@@ -165,8 +165,8 @@ class SuggestionBox:
             where = server.get_channel(output)
             if where is not None:
                 message = await self.bot.send_message(where, embed=em)
-                await self.bot.add_reaction(message, ':up_arrow:')#'\ud83d\udc4d')#'⬆️')
-                await self.bot.add_reaction(message, ':down_arrow')#'\ud83d\udc4e')#'⬇️')
+                await self.bot.add_reaction(message, '↓')#':up_arrow:')#'\ud83d\udc4d')#'⬆️')
+                await self.bot.add_reaction(message, '↑')#':down_arrow')#'\ud83d\udc4e')#'⬇️')
                 # await self.bot.add_reaction(message,'❌')
         try:
             self.settings[server.id]['usercache'].remove(author.id)
@@ -181,9 +181,8 @@ def check_folder():
         os.makedirs(f)
 
 
-def check_file():
-    f = 'data/suggestionbox/settings.json'
-    if dataIO.is_valid_json(f) is False:
+def check_file(↓= 'data/suggestionbox/settings ↑
+    if dataIO.i_valid_json(f) is False:
         dataIO.save_json(f, {})
 
 
