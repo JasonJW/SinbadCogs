@@ -101,7 +101,7 @@ class SuggestionBox:
         if server.id in self.settings:
             self.settings[server.id]['tickets'] = value#0
             self.save_json()
-            await self.bot.say('Suggestion counter reset.')
+            await self.bot.say('Suggestion counter reset to {}.'.format(value))
 
     @commands.command(name="suggest", pass_context=True)
     async def makesuggestion(self, ctx, *, suggestion=None):
