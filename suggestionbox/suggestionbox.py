@@ -95,7 +95,7 @@ class SuggestionBox:
 
     @checks.admin_or_permissions(manage_server=True)
     @setsuggest.command(name='reset', pass_context=True,no_pm=True)
-    async def suggest_reset(self,ctx, value:int=0):
+    async def suggest_reset(self,ctx, value : int = 0):
         '''Reset Ticket Counter for Server'''
         server = ctx.message.server
         if server.id in self.settings:
@@ -165,8 +165,8 @@ class SuggestionBox:
             where = server.get_channel(output)
             if where is not None:
                 message = await self.bot.send_message(where, embed=em)
-                await self.bot.add_reaction(message, '↑')#':up_arrow:')#'\ud83d\udc4d')#'⬆️')
-                await self.bot.add_reaction(message, '↓')#':down_arrow')#'\ud83d\udc4e')#'⬇️')
+                await self.bot.add_reaction(message, '\N{UP ARROW}')#':up_arrow:')#'\ud83d\udc4d')#'⬆️')
+                await self.bot.add_reaction(message, '\N{DOWN ARROW}')#':down_arrow')#'\ud83d\udc4e')#'⬇️')
                 # await self.bot.add_reaction(message,'❌')
         try:
             self.settings[server.id]['usercache'].remove(author.id)
