@@ -95,11 +95,11 @@ class SuggestionBox:
 
     @checks.admin_or_permissions(manage_server=True)
     @setsuggest.command(name='reset', pass_context=True,no_pm=True)
-    async def suggest_reset(self,ctx):
+    async def suggest_reset(self,ctx, value:int=0):
         '''Reset Ticket Counter for Server'''
         server = ctx.message.server
         if server.id in self.settings:
-            self.settings[server.id]['tickets'] = 0
+            self.settings[server.id]['tickets'] = value#0
             self.save_json()
             await self.bot.say('Suggestion counter reset.')
 
